@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JSFiddle oxq54L6d</title>
+
+  <style>
+    /* CONTACT */
+
+.contact{
+margin-top:25px;
+}
+select{
+outline:none;
+font-size:14px;
+}
+.contact h3{
+margin-bottom:10px;
+}
+.sensBox{
+display:none;
+padding:10px;
+background:#0f1118;
+border-radius:10px;
+margin-bottom:12px;
+}
+
+#sensSlider{
+width:100%;
+}
+
+.sensText{
+font-size:14px;
+margin-top:5px;
+}
+
+#sensSlider{
+width:100%;
+cursor:pointer;
+}
+
+
+.sensBox input{
+width:100%;
+}
+/* INJECT BOX */
+
+.injectBox{
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:rgba(15,17,24,.95);
+backdrop-filter:blur(12px);
+padding:25px;
+border-radius:16px;
+width:260px;
+text-align:center;
+z-index:99999;
+box-shadow:0 0 50px #000;
+}
+
+.injectTitle{
+font-size:18px;
+margin-bottom:15px;
+color:#00eaff;
+}
+
+.injectBtn{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:none;
+border-radius:10px;
+background:#00eaff;
+color:black;
+font-weight:bold;
+cursor:pointer;
+}
+
+.injectBtn:active{
+transform:scale(.96);
+}
+.injectTitle{
+font-size:18px;
+margin-bottom:15px;
+color:#00eaff;
+}
+
+.injectBtn{
+display:block;
+width:200px;
+margin:8px auto;
+padding:10px;
+border:none;
+border-radius:10px;
+background:#00eaff;
+color:black;
+font-weight:bold;
+cursor:pointer;
+}
+
+.injectBtn:active{
+transform:scale(.95);
+}
+.sensText{
+margin-top:6px;
+font-size:14px;
+opacity:.8;
+}
+.social{
+display:flex;
+justify-content:center;
+gap:20px;
+}
+
+.social img{
+width:40px;
+cursor:pointer;
+transition:.2s;
+}
+
+.social img:hover{
+transform:scale(1.2);
+}
+
+.footer{
+margin-top:10px;
+font-size:13px;
+opacity:.5;
+}
+.switch{
+width:52px;
+height:30px;
+background:#444;
+border-radius:50px;
+position:relative;
+cursor:pointer;
+transition:.3s;
+}
+
+.switch::after{
+content:"";
+width:26px;
+height:26px;
+background:white;
+border-radius:50%;
+position:absolute;
+top:2px;
+left:2px;
+transition:.3s cubic-bezier(.4,0,.2,1);
+box-shadow:0 2px 6px rgba(0,0,0,.4);
+}
+
+.switch.active{
+box-shadow:0 0 10px #00eaff;
+background:#34c759;
+}
+body{
+animation:iosOpen .6s ease;
+}
+
+@keyframes iosOpen{
+from{
+filter:blur(20px);
+opacity:0;
+transform:scale(1.05);
+}
+to{
+filter:blur(0);
+opacity:1;
+transform:scale(1);
+}
+}
+.switch.active::after{
+left:24px;
+}
+.loadingBlur{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+backdrop-filter:blur(12px);
+background:rgba(0,0,0,.4);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:999;
+}
+.logo{
+font-family:"SF Pro Display",-apple-system,system-ui;
+font-weight:700;
+letter-spacing:1.2px;
+font-size:22px;
+background:linear-gradient(90deg,#4DA3FF,#A855F7,#00F0FF);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 0 15px rgba(77,163,255,.5);
+}
+.item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(20,22,30,.6);
+backdrop-filter:blur(12px);
+padding:15px;
+margin-bottom:12px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,.05);
+}
+.iosLoader{
+width:40px;
+height:40px;
+border:4px solid #333;
+border-top:4px solid #00eaff;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+.toast{
+position:fixed;
+top:45%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#2c9cff;
+padding:15px 25px;
+border-radius:12px;
+font-size:15px;
+font-family:"SF Pro Display",-apple-system,BlinkMacSystemFont,sans-serif;
+letter-spacing:.3px;
+animation:fadeToast 2s forwards;
+}
+.app-name{
+font-size:26px;
+margin-top:10px;
+font-weight:700;
+letter-spacing:3px;
+background:linear-gradient(90deg,#00eaff,#4facfe,#00eaff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 0 15px rgba(0,234,255,.5);
+animation:glowText 3s linear infinite;
+}
+
+@keyframes glowText{
+0%{filter:hue-rotate(0deg)}
+100%{filter:hue-rotate(360deg)}
+}
+/* ===== CODE TERMINAL ===== */
+/* CODE BOX */
+
+.codeBox{
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:340px;
+background:#0b0d13;
+border-radius:16px;
+padding:15px;
+box-shadow:0 0 40px rgba(0,0,0,.8);
+z-index:99999;
+animation:popCode .35s ease;
+}
+
+/* animation xuất hiện */
+
+@keyframes popCode{
+from{
+opacity:0;
+transform:translate(-50%,-40%) scale(.9);
+}
+to{
+opacity:1;
+transform:translate(-50%,-50%) scale(1);
+}
+}
+
+.codeHeader{
+font-size:13px;
+opacity:.6;
+margin-bottom:5px;
+}
+
+#codeText{
+font-size:12px;
+line-height:1.4;
+color:#00ff9c;
+max-height:140px;
+overflow:auto;
+}
+
+.app-logo{
+width:85px;
+height:85px;
+border-radius:24px;
+display:block;
+margin:auto;
+margin-bottom:14px;
+box-shadow:
+0 10px 30px rgba(0,0,0,.6),
+0 0 30px rgba(0,234,255,.35);
+animation:logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-8px)}
+}
+
+.app-icon{
+width:75px;
+height:75px;
+border-radius:24px;
+margin:auto;
+display:block;
+box-shadow:
+0 10px 30px rgba(0,0,0,.6),
+0 0 25px rgba(0,234,255,.35);
+animation:appPop .5s ease;
+}
+
+@keyframes appPop{
+from{
+transform:scale(.6);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+@keyframes logoFloat{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-6px)}
+}
+@keyframes fadeToast{
+0%{opacity:0}
+10%{opacity:1}
+90%{opacity:1}
+100%{opacity:0}
+}
+.iosBlur{
+position:fixed;
+inset:0;
+backdrop-filter:blur(20px);
+background:rgba(0,0,0,.3);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+transition:.4s;
+}
+.title{
+font-family:"SF Pro Display",-apple-system,system-ui;
+font-weight:700;
+letter-spacing:1.2px;
+font-size:22px;
+background:linear-gradient(90deg,#4DA3FF,#A855F7,#00F0FF);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 0 15px rgba(77,163,255,.5);
+}
+.toggle{
+appearance:none;
+width:50px;
+height:28px;
+background:#444;
+border-radius:20px;
+position:relative;
+transition:.3s;
+cursor:pointer;
+}
+
+.toggle:checked{
+background:#00eaff;
+}
+
+.toggle::before{
+content:"";
+position:absolute;
+width:24px;
+height:24px;
+background:white;
+border-radius:50%;
+top:2px;
+left:2px;
+transition:.3s;
+}
+
+.toggle:checked::before{
+transform:translateX(22px);
+}
+.toggle{
+appearance:none;
+width:50px;
+height:28px;
+background:#444;
+border-radius:20px;
+position:relative;
+transition:.3s;
+cursor:pointer;
+}
+
+.toggle:checked{
+background:#00eaff;
+}
+
+.toggle::before{
+content:"";
+position:absolute;
+width:24px;
+height:24px;
+background:white;
+border-radius:50%;
+top:2px;
+left:2px;
+transition:.3s;
+}
+
+.toggle:checked::before{
+transform:translateX(22px);
+}
+.status-bar{
+color:#00FFB3;
+font-weight:600;
+text-shadow:0 0 10px #00FFB3;
+}
+
+
+@keyframes pulse{
+0%{opacity:.5}
+50%{opacity:1}
+100%{opacity:.5}
+}
+body::before{
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle at 20% 20%,#00eaff22,transparent 40%),
+radial-gradient(circle at 80% 70%,#0077ff22,transparent 40%);
+animation:bgMove 18s linear infinite;
+z-index:-1;
+}
+
+@keyframes bgMove{
+0%{transform:translate(0,0)}
+50%{transform:translate(-10%,-10%)}
+100%{transform:translate(0,0)}
+}
+.spinner{
+width:40px;
+height:40px;
+border-radius:50%;
+border:4px solid rgba(255,255,255,.2);
+border-top:4px solid #00eaff;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+100%{transform:rotate(360deg);}
+}
+  </style>
+
+  
+</head>
+<body>
+  <!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SYSTEM IOS VER 2</title>
+<style>
+
+body{
+margin:0;
+background:#0c0c0c;
+font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
+}
+
+/* LOGIN CARD */
+
+.login-box{
+width:320px;
+background:#121212;
+border-radius:20px;
+padding:25px;
+text-align:center;
+box-shadow:0 0 30px rgba(0,255,255,0.15);
+animation:fadeIn .6s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(20px)}
+to{opacity:1; transform:translateY(0)}
+}
+
+.title{
+font-size:28px;
+color:#00eaff;
+margin-bottom:10px;
+}
+
+.subtitle{
+opacity:.7;
+margin-bottom:20px;
+}
+
+.key-input{
+width:100%;
+padding:12px;
+border-radius:12px;
+border:none;
+outline:none;
+background:#1a1a1a;
+color:white;
+margin-bottom:15px;
+font-size:15px;
+}
+
+.login-btn{
+width:100%;
+padding:12px;
+border-radius:12px;
+border:none;
+background:#00eaff;
+color:black;
+font-weight:bold;
+cursor:pointer;
+transition:.2s;
+}
+
+.login-btn:active{
+transform:scale(.96);
+}
+
+.status{
+margin-top:12px;
+font-size:14px;
+opacity:.8;
+min-height:20px;
+}
+
+.loader{
+width:25px;
+height:25px;
+border:3px solid #444;
+border-top:3px solid #00eaff;
+border-radius:50%;
+margin:10px auto;
+animation:spin 1s linear infinite;
+display:none;
+}
+
+@keyframes spin{
+0%{transform:rotate(0)}
+100%{transform:rotate(360deg)}
+}
+
+</style>
+
+</head>
+
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<div class="login-box">
+
+<img class="app-logo"
+src="https://sf-static.upanhlaylink.com/img/image_20260315bfb9fa385a7398288bdc9b36a876e91e.jpg">
+
+<div class="title">SYSTEM IOS VER 2</div>
+<div class="subtitle">KEY LOGIN</div>
+
+<input id="keyInput" class="key-input" placeholder="Nhập key của bạn vào">
+
+<button id="loginBtn" class="login-btn">
+LOGIN
+</button>
+
+<div id="loader" class="loader"></div>
+
+<div id="status" class="status"></div>
+
+<!-- CONTACT -->
+
+<div class="contact">
+
+<h3>CONTACT</h3>
+
+<div class="social">
+
+<a href="https://zalo.me/0396134792" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg">
+</a>
+
+<a href="https://facebook.com/cducdz" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png">
+</a>
+
+</div>
+
+<div class="footer">by NgChiDuc</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* ================= CONFIG ================= */
+
+const SERVER_URL="https://testapi-production-11a6.up.railway.app/";
+
+/* ================= DEVICE ID ================= */
+
+let deviceId =
+localStorage.getItem("SYSTEMIOS_DEVICE") || createDevice();
+
+function createDevice(){
+let id="SYS-"+Date.now()+"-"+Math.random().toString(36).substr(2,6);
+localStorage.setItem("SYSTEMIOS_DEVICE",id);
+return id;
+}
+
+/* ================= CHECK KEY ================= */
+async function checkKey(key, auto = false) {
+    const status = document.getElementById("status");
+    const loader = document.getElementById("loader");
+    const btn = document.getElementById("loginBtn");
+
+    if (!auto) {
+        loader.style.display = "block";
+        btn.disabled = true;
+    }
+    status.innerText = "Checking key...";
+
+    try {
+        const res = await fetch(SERVER_URL + "checkKey", { // Đã sửa đường dẫn URL
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                key: key,
+                deviceId: deviceId
+            })
+        });
+
+        const data = await res.json();
+
+        loader.style.display = "none";
+        btn.disabled = false;
+
+        if (data.success) {
+            status.innerText = "✅ Login success";
+            localStorage.setItem("SYSTEMIOS_KEY", key);
+
+            /* LOAD MENU */
+            setTimeout(() => {
+                showMenu(data.daysLeft);
+startKeyTimer(data.daysLeft);
+                startGalaxy();
+            }, 700);
+        } else {
+            status.innerText = "❌ " + (data.message || "Key không hợp lệ");
+            localStorage.removeItem("SYSTEMIOS_KEY");
+        }
+
+    } catch (e) {
+        console.error("Lỗi kết nối server:", e);
+        loader.style.display = "none";
+        btn.disabled = false;
+        status.innerText = "❌ Không thể kết nối đến Server";
+    }
+}
+
+/* ================= LOGIN CLICK ================= */
+
+document.getElementById("loginBtn").onclick=()=>{
+
+const key=document.getElementById("keyInput").value.trim();
+
+if(!key){
+document.getElementById("status").innerText="Vui lòng nhập key";
+return;
+}
+
+checkKey(key,false);
+};
+
+/* ================= AUTO LOGIN ================= */
+
+const savedKey=localStorage.getItem("SYSTEMIOS_KEY");
+
+if(savedKey){
+document.getElementById("keyInput").value=savedKey;
+checkKey(savedKey,true);
+}
+
+/* ================= BASIC PROTECTION ================= */
+
+document.addEventListener("keydown",(e)=>{
+if(e.keyCode==123) e.preventDefault();
+if(e.ctrlKey && e.shiftKey && e.keyCode==73) e.preventDefault();
+if(e.ctrlKey && e.keyCode==85) e.preventDefault();
+});
+
+document.oncontextmenu=()=>false;
+
+</script>
+<div id="loadingBlur" class="loadingBlur">
+<div class="iosLoader"></div>
+</div>
+<script>
+
+/* ===== SHOW MENU ===== */
+
+function showMenu(days){
+document.body.innerHTML = `
+
+<style>
+/* ===== INJECT POPUP ===== */
+
+.injectBox{
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#0f1118;
+padding:25px;
+border-radius:16px;
+width:260px;
+text-align:center;
+box-shadow:0 0 40px rgba(0,0,0,.7);
+z-index:99999;
+}
+
+.injectTitle{
+font-size:18px;
+margin-bottom:15px;
+color:#00eaff;
+}
+
+.injectBtn{
+width:100%;
+padding:11px;
+margin:8px 0;
+border:none;
+border-radius:10px;
+background:#00eaff;
+color:black;
+font-weight:bold;
+cursor:pointer;
+transition:.2s;
+}
+
+.injectBtn:active{
+transform:scale(.95);
+}
+body{
+margin:0;
+background:#05070d;
+font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+color:white;
+}
+
+/* HEADER */
+
+.header{
+padding:15px;
+text-align:center;
+border-bottom:1px solid #222;
+}
+
+.app-icon{
+width:70px;
+height:70px;
+border-radius:20px;
+margin:auto;
+display:block;
+box-shadow:0 0 20px #00eaff55;
+}
+
+.app-name{
+font-size:22px;
+margin-top:8px;
+color:#00eaff;
+letter-spacing:1px;
+}
+
+
+/* MENU */
+
+.menu{
+padding:15px;
+}
+
+.item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#0f1118;
+padding:15px;
+margin-bottom:12px;
+border-radius:14px;
+}
+
+.item-left{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:16px;
+}
+
+/* SWITCH */
+
+.switch{
+width:50px;
+height:26px;
+background:#333;
+border-radius:20px;
+position:relative;
+cursor:pointer;
+transition:.3s;
+}
+
+.switch::after{
+content:"";
+width:22px;
+height:22px;
+background:white;
+border-radius:50%;
+position:absolute;
+top:2px;
+left:3px;
+transition:.3s;
+}
+
+.switch.active{
+background:#00eaff;
+}
+
+.switch.active::after{
+left:25px;
+}
+
+/* TOAST */
+
+.toast{
+position:fixed;
+top:45%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#2c9cff;
+padding:18px 25px;
+border-radius:14px;
+font-size:16px;
+box-shadow:0 0 20px rgba(0,0,0,.5);
+animation:fadeToast 3s forwards;
+}
+
+@keyframes fadeToast{
+0%{opacity:0;transform:translate(-50%,-40%)}
+10%{opacity:1}
+90%{opacity:1}
+100%{opacity:0}
+}
+/* SYSTEM PROCESS BOX */
+
+.codeBox{
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:340px;
+background:#0b0d13;
+border-radius:16px;
+padding:15px;
+box-shadow:0 0 40px rgba(0,0,0,.8);
+z-index:99999;
+}
+
+.codeHeader{
+font-size:13px;
+opacity:.6;
+margin-bottom:8px;
+}
+
+#codeText{
+font-size:12px;
+color:#00ff9c;
+line-height:1.4;
+max-height:160px;
+overflow:auto;
+}
+</style>
+
+<div id="injectBox" class="injectBox">
+
+<div class="injectTitle">SELECT GAME</div>
+
+<button class="injectBtn" onclick="injectGame('ff')">
+Inject Free Fire
+</button>
+
+<button class="injectBtn" onclick="injectGame('ffmax')">
+Inject Free Fire MAX
+</button>
+
+</div>
+
+
+<div class="header">
+
+<img class="app-icon"
+src="https://sf-static.upanhlaylink.com/img/image_20260315bfb9fa385a7398288bdc9b36a876e91e.jpg">
+<div class="app-name">SYSTEM IOS VER2</div>
+<div class="status-bar" id="sysStatus">
+🔄 Checking system...
+</div>
+
+</div>
+
+
+<div class="menu">
+<!-- CONFIRM BAR -->
+<div id="confirmBar" style="
+display:none;
+background:#18202c;
+padding:14px;
+border-radius:12px;
+margin-bottom:12px;
+text-align:center;
+">
+
+<div id="confirmMsg" style="margin-bottom:10px;">
+Bạn có muốn tiếp tục không?
+</div>
+
+<button onclick="confirmYes()" class="injectBtn">
+YES
+</button>
+
+<button onclick="confirmNo()" class="injectBtn"
+style="background:#333;color:white;">
+NO
+</button>
+let selectedDevice=null;
+
+document.addEventListener("change",(e)=>{
+
+if(e.target.id==="deviceSelect"){
+
+const device=e.target.value;
+if(device==="auto") return;
+
+selectedDevice=device;
+
+document.getElementById("confirmMsg").innerText =
+"Bạn có muốn tiếp tục inject cho "
++ getDeviceName(device) + " ?";
+
+document.getElementById("confirmBar").style.display="block";
+
+}
+
+});
+</div>
+<div class="item">
+<div class="item-left">DEVICE MODEL</div>
+
+<select id="deviceSelect" style="
+background:#0f1118;
+color:white;
+border:none;
+padding:6px;
+border-radius:8px;
+">
+
+<option value="auto">Auto Detect</option>
+
+<option value="iphone6plus">iPhone 6 Plus</option>
+<option value="iphone6s">iPhone 6s</option>
+<option value="iphone6splus">iPhone 6s Plus</option>
+
+<option value="iphone7">iPhone 7</option>
+<option value="iphone7plus">iPhone 7 Plus</option>
+
+<option value="iphone8">iPhone 8</option>
+<option value="iphone8plus">iPhone 8 Plus</option>
+
+<option value="iphonex">iPhone X</option>
+<option value="iphonexs">iPhone XS</option>
+<option value="iphonexsmax">iPhone XS Max</option>
+<option value="iphonexr">iPhone XR</option>
+
+<option value="iphone11">iPhone 11</option>
+<option value="iphone11pro">iPhone 11 Pro</option>
+<option value="iphone11promax">iPhone 11 Pro Max</option>
+
+<option value="iphone12mini">iPhone 12 mini</option>
+<option value="iphone12">iPhone 12</option>
+<option value="iphone12pro">iPhone 12 Pro</option>
+<option value="iphone12promax">iPhone 12 Pro Max</option>
+
+<option value="iphone13mini">iPhone 13 mini</option>
+<option value="iphone13">iPhone 13</option>
+<option value="iphone13pro">iPhone 13 Pro</option>
+<option value="iphone13promax">iPhone 13 Pro Max</option>
+
+<option value="iphone14">iPhone 14</option>
+<option value="iphone14plus">iPhone 14 Plus</option>
+<option value="iphone14pro">iPhone 14 Pro</option>
+<option value="iphone14promax">iPhone 14 Pro Max</option>
+
+<option value="iphone15">iPhone 15</option>
+<option value="iphone15plus">iPhone 15 Plus</option>
+<option value="iphone15pro">iPhone 15 Pro</option>
+<option value="iphone15promax">iPhone 15 Pro Max</option>
+
+<option value="iphone16">iPhone 16</option>
+<option value="iphone16plus">iPhone 16 Plus</option>
+<option value="iphone16pro">iPhone 16 Pro</option>
+<option value="iphone16promax">iPhone 16 Pro Max</option>
+
+<option value="iphone17">iPhone 17</option>
+<option value="iphone17plus">iPhone 17 Plus</option>
+<option value="iphone17pro">iPhone 17 Pro</option>
+<option value="iphone17promax">iPhone 17 Pro Max</option>
+</select>
+
+</div>
+<div class="item">
+<div class="item-left">LOCK Sensitivity</div>
+<div class="switch"></div>
+</div>
+
+<div class="sensBox" id="sensBox">
+<input type="range" min="0" max="100" value="0" id="sensSlider">
+<div class="sensText">Sensitivity: <span id="sensValue">0%</span></div>
+</div>
+
+<div class="item">
+<div class="item-left">SCREEN BOOST</div>
+<div class="switch"></div>
+</div>
+
+<div class="item">
+<div class="item-left">BOOST FPS</div>
+<div class="switch"></div>
+</div>
+
+<div class="item">
+<div class="item-left">OPTIMIZER (CPU,GPU,RAM)</div>
+<div class="switch"></div>
+</div>
+
+<div class="item">
+<div class="item-left">FIX RUNG</div>
+<div class="switch"></div>
+</div>
+
+<div class="item">
+<div class="item-left">MAX PERFORMANCE</div>
+<div class="switch"></div>
+</div>
+
+
+<div class="item">
+<div class="item-left">LOCK HEAD</div>
+<div class="switch"></div>
+</div>
+
+<div class="item">
+<div class="item-left">REGEDIT</div>
+<div class="switch"></div>
+</div>
+
+<div class="item">
+<div class="item-left">BOOST On</div>
+<div class="switch"></div>
+</div>
+
+</div>
+
+<div class="toast">
+Đăng nhập thành công! Còn ${days} ngày
+</div>
+<div class="contact">
+
+<div class="social">
+
+<a href="https://zalo.me/0396134792" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg">
+</a>
+
+<a href="https://facebook.com/cducdz" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png">
+</a>
+
+</div>
+
+<div class="footer">by NgChiDuc</div>
+
+</div>
+<div id="codeBox" class="codeBox">
+<div class="codeHeader">SYSTEM PROCESS</div>
+<pre id="codeText"></pre>
+</div>
+`;
+
+initSwitch();
+/* ===== DEVICE SELECT EVENT ===== */
+
+document.addEventListener("change", function(e){
+
+if(e.target.id === "deviceSelect"){
+
+const device = e.target.value;
+
+if(device === "auto") return;
+
+setTimeout(()=>{
+
+if(confirm("Bạn có muốn Inject cho "+getDeviceName(device)+" ?")){
+
+injectSelectedDevice(device);
+
+}
+
+},200);
+
+}
+
+});
+function getDeviceName(id){
+
+const map = {
+iphone6plus:"iPhone 6 Plus",
+iphone6s:"iPhone 6s",
+iphone6splus:"iPhone 6s Plus",
+iphone7:"iPhone 7",
+iphone7plus:"iPhone 7 Plus",
+iphone8:"iPhone 8",
+iphone8plus:"iPhone 8 Plus",
+iphonex:"iPhone X",
+iphonexs:"iPhone XS",
+iphonexsmax:"iPhone XS Max",
+iphonexr:"iPhone XR",
+
+iphone11:"iPhone 11",
+iphone11pro:"iPhone 11 Pro",
+iphone11promax:"iPhone 11 Pro Max",
+
+iphone12:"iPhone 12",
+iphone12pro:"iPhone 12 Pro",
+iphone12promax:"iPhone 12 Pro Max",
+
+iphone13:"iPhone 13",
+iphone13pro:"iPhone 13 Pro",
+iphone13promax:"iPhone 13 Pro Max",
+
+iphone14:"iPhone 14",
+iphone14pro:"iPhone 14 Pro",
+iphone14promax:"iPhone 14 Pro Max",
+
+iphone15:"iPhone 15",
+iphone15pro:"iPhone 15 Pro",
+iphone15promax:"iPhone 15 Pro Max",
+
+iphone16:"iPhone 16",
+iphone16pro:"iPhone 16 Pro",
+iphone16promax:"iPhone 16 Pro Max",
+
+iphone17:"iPhone 17",
+iphone17pro:"iPhone 17 Pro",
+iphone17promax:"iPhone 17 Pro Max"
+};
+
+return map[id] || id;
+}
+function getChip(device){
+
+if(device.includes("6")) return "A9";
+if(device.includes("7")) return "A10 Fusion";
+if(device.includes("8") || device.includes("x")) return "A11 Bionic";
+if(device.includes("xs") || device.includes("xr")) return "A12 Bionic";
+if(device.includes("11")) return "A13 Bionic";
+if(device.includes("12")) return "A14 Bionic";
+if(device.includes("13")) return "A15 Bionic";
+if(device.includes("14")) return "A16 Bionic";
+if(device.includes("15")) return "A17 Pro";
+if(device.includes("16")) return "A18 Pro";
+if(device.includes("17")) return "A19 Pro";
+
+return "Unknown";
+}
+function injectSelectedDevice(device){
+
+const chip = getChip(device);
+const name = getDeviceName(device);
+
+runDeviceCode(name, chip);
+
+}
+function runDeviceCode(device, chip){
+
+const box = document.getElementById("codeBox");
+const text = document.getElementById("codeText");
+
+box.style.display="block";
+text.innerHTML="";
+
+const lines = [
+"[SYSTEM] Device detected: "+device,
+"[SYSTEM] Chipset: "+chip,
+"[SYSTEM] Loading profile...",
+"[SYSTEM] CPU Optimization...",
+"[SYSTEM] GPU Calibration...",
+"[SYSTEM] RAM Cleaning...",
+"[SYSTEM] Sensitivity Sync...",
+"[SYSTEM] FPS Boost Enabled",
+"[SUCCESS] Optimized Successfully ✔"
+];
+
+let i=0;
+
+const interval=setInterval(()=>{
+
+text.innerHTML += lines[i]+"\n";
+text.scrollTop=text.scrollHeight;
+
+i++;
+
+if(i>=lines.length){
+clearInterval(interval);
+
+setTimeout(()=>{
+box.style.display="none";
+},2000);
+}
+
+},350);
+
+}
+checkSystemStatus();
+async function checkSystemStatus(){
+
+const el=document.getElementById("sysStatus");
+
+const iosVersion = getIOSVersion();
+
+let serverOK=false;
+
+try{
+const r = await fetch(SERVER_URL + "checkKey", {method:"OPTIONS"});
+serverOK = true;
+}catch(e){}
+
+el.innerHTML =
+`📱 ${iosVersion} | 🌐 Server: ${serverOK ? "🟢 Online" : "🔴 Offline"}`;
+}
+}
+/* HIỆN BOX CHỌN GAME SAU LOGIN */
+setTimeout(()=>{
+const box = document.getElementById("injectBox");
+if(box) box.style.display = "block";
+},500);
+
+/* ===== SWITCH LOGIC ===== */
+
+function initSwitch(){
+
+document.querySelectorAll(".switch").forEach(sw=>{
+
+sw.onclick=()=>{
+
+sw.classList.toggle("active");
+
+const name =
+sw.parentElement.querySelector(".item-left").innerText;
+
+const active = sw.classList.contains("active");
+
+showToast(name + (active ? " ON" : " OFF"));
+
+/* SHOW SLIDER */
+
+if(name==="LOCK Sensitivity"){
+
+const box=document.getElementById("sensBox");
+
+box.style.display = active ? "block" : "none";
+
+}
+
+if(active && name === "BOOST On"){
+
+showToast("Select game to launch");
+
+document.getElementById("injectBox").style.display = "block";
+
+}
+
+if(active && name.toUpperCase().includes("OPTIMIZER")){
+runCode(name);
+}
+/* SCREEN BOOST */
+
+if(name==="SCREEN BOOST"){
+
+if(active){
+
+showToast("⚡ Screen Boost Activated");
+
+document.body.style.transition="0.4s";
+document.body.style.filter="brightness(1.2) contrast(1.15) saturate(1.2)";
+
+}else{
+
+showToast("Screen Boost Disabled");
+
+document.body.style.filter="none";
+
+}
+
+}
+};
+
+});
+
+/* SLIDER */
+
+const slider=document.getElementById("sensSlider");
+const value=document.getElementById("sensValue");
+
+slider.oninput=function(){
+value.innerText=this.value+"%";
+};
+
+}
+/* ===== GALAXY 3D ===== */
+
+function startGalaxy(){
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+75,
+window.innerWidth/window.innerHeight,
+0.1,
+1000
+);
+
+const renderer = new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(window.innerWidth,window.innerHeight);
+
+renderer.domElement.style.position="fixed";
+renderer.domElement.style.top="0";
+renderer.domElement.style.zIndex="-1";
+
+document.body.appendChild(renderer.domElement);
+
+/* stars */
+
+const geometry = new THREE.BufferGeometry();
+const vertices = [];
+
+for(let i=0;i<6000;i++){
+
+vertices.push(
+(Math.random()-0.5)*2000,
+(Math.random()-0.5)*2000,
+(Math.random()-0.5)*2000
+);
+
+}
+
+geometry.setAttribute(
+"position",
+new THREE.Float32BufferAttribute(vertices,3)
+);
+
+const material = new THREE.PointsMaterial({ size:1.4, color:0xffffff });
+
+
+const stars = new THREE.Points(geometry,material);
+scene.add(stars);
+
+camera.position.z = 5;
+
+/* animation */
+
+function animate(){
+
+requestAnimationFrame(animate);
+
+stars.rotation.x += 0.0003;
+stars.rotation.y += 0.0005;
+
+renderer.render(scene,camera);
+}
+
+animate();
+
+window.addEventListener("resize",()=>{
+camera.aspect=window.innerWidth/window.innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(window.innerWidth,window.innerHeight);
+});
+
+}
+function injectGame(type){
+
+document.getElementById("injectBox").style.display="none";
+
+if(type==="ff"){
+
+showToast("Launching Free Fire...");
+
+runCode("Free Fire Inject");
+
+setTimeout(()=>{
+window.location.href="garena://"; 
+},2000);
+
+}
+
+if(type==="ffmax"){
+
+showToast("Launching Free Fire MAX...");
+
+runCode("Free Fire MAX Inject");
+
+setTimeout(()=>{
+window.location.href="garenaffmax://";
+},2000);
+
+}
+
+}
+
+function closeInject(){
+document.getElementById("injectBox").style.display="none";
+}
+function showToast(text){
+
+const t=document.createElement("div");
+t.className="toast";
+t.innerText=text;
+
+document.body.appendChild(t);
+
+setTimeout(()=>{
+t.remove();
+},3000);
+document.getElementById("injectBox").style.display="none";
+
+let device =
+document.getElementById("deviceSelect").value;
+
+let deviceName = device;
+
+if(device==="auto"){
+deviceName = navigator.userAgent;
+}
+
+showToast("Injecting for "+device);
+
+runCode(type+" - "+device);
+
+}
+
+function startKeyTimer(days){
+
+const statusBar = document.getElementById("sysStatus");
+
+let seconds = days * 24 * 60 * 60;
+
+setInterval(()=>{
+
+seconds--;
+
+let d = Math.floor(seconds / 86400);
+let h = Math.floor((seconds % 86400) / 3600);
+let m = Math.floor((seconds % 3600) / 60);
+
+statusBar.innerHTML =
+`📱 ${getIOSVersion()}
+ | 🌐 Server: 🟢 Online
+ | 🔑 ${d}d ${h}h ${m}m`;
+
+if(seconds <= 0){
+statusBar.innerHTML = "❌ Key Expired";
+}
+
+},1000);
+
+}
+let selectedDevice=null;
+
+document.addEventListener("change",(e)=>{
+
+if(e.target.id==="deviceSelect"){
+
+const device=e.target.value;
+if(device==="auto") return;
+
+selectedDevice=device;
+
+document.getElementById("confirmMsg").innerText =
+"Bạn có muốn tiếp tục inject cho "
++ getDeviceName(device) + " ?";
+
+document.getElementById("confirmBar").style.display="block";
+
+}
+
+});
+function confirmYes(){
+
+document.getElementById("confirmBar").style.display="none";
+
+injectSelectedDevice(selectedDevice);
+
+}
+
+function confirmNo(){
+
+document.getElementById("confirmBar").style.display="none";
+
+showToast("Đã huỷ inject");
+
+}
+function getIOSVersion(){
+
+const ua = navigator.userAgent;
+
+const match = ua.match(/OS (\d+)_(\d+)_?(\d+)?/);
+
+if(match){
+return "iOS " + match[1] + "." + match[2] + "." + (match[3] || "0");
+}
+
+return "Unknown OS";
+}
+function detectDeviceInfo(){
+
+const ua = navigator.userAgent;
+
+let device="iPhone";
+let chip="Unknown";
+let ram="~4GB";
+let fps="Standard";
+
+/* DEVICE DETECT */
+
+if(ua.includes("iPhone14,3")){
+device="iPhone 13 Pro Max";
+chip="A15 Bionic";
+ram="~6GB";
+fps="Ultra";
+}
+
+else if(ua.includes("iPhone14,2")){
+device="iPhone 13 Pro";
+chip="A15 Bionic";
+ram="~6GB";
+fps="Ultra";
+}
+
+else if(ua.includes("iPhone13,4")){
+device="iPhone 12 Pro Max";
+chip="A14 Bionic";
+ram="~6GB";
+fps="High";
+}
+
+else if(ua.includes("iPhone12,5")){
+device="iPhone 11 Pro Max";
+chip="A13 Bionic";
+ram="~4GB";
+fps="High";
+}
+
+else if(ua.includes("iPhone11,8")){
+device="iPhone XR";
+chip="A12 Bionic";
+ram="~3GB";
+fps="Medium";
+}
+
+else if(ua.includes("iPhone10,3")){
+device="iPhone X";
+chip="A11 Bionic";
+ram="~3GB";
+fps="Medium";
+}
+
+return {
+device,
+chip,
+ram,
+fps
+};
+
+}
+</script>
+
+</body>
+</html>
+
+  <script>
+    function showToast(text){
+
+let toast=document.createElement("div");
+
+toast.className="toast";
+toast.innerText=text;
+
+document.body.appendChild(toast);
+
+setTimeout(()=>{
+toast.remove();
+},2000);
+
+}
+
+
+setInterval(async()=>{
+
+ let res=await fetch(SERVER_URL+"/checkKey",{
+   method:"POST",
+   headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({
+     key:key,
+     deviceId:getDeviceID()
+   })
+ });
+
+ let data=await res.json();
+
+ if(!data.success){
+
+   localStorage.removeItem("SYSTEMIOS_KEY");
+
+   showToast("⛔ Key expired");
+
+   setTimeout(()=>{
+     location.reload();
+   },1500);
+ }
+
+},60000);function showToast(msg){
+
+ const t=document.createElement("div");
+
+ t.innerText=msg;
+ t.style.cssText=`
+ position:fixed;
+ bottom:40px;
+ left:50%;
+ transform:translateX(-50%);
+ background:rgba(30,30,30,.9);
+ padding:12px 20px;
+ border-radius:20px;
+ color:white;
+ z-index:99999;
+ backdrop-filter:blur(10px);
+ `;
+
+ document.body.appendChild(t);
+
+ setTimeout(()=>t.remove(),2000);
+}
+/* ===== FAKE OPTIMIZER CODE ===== */
+function runCode(title){
+
+const box = document.getElementById("codeBox");
+const text = document.getElementById("codeText");
+
+box.style.display="block";
+
+let lines = [
+"[SYSTEM] Detect device...",
+"[SYSTEM] Applying device profile...",
+"[SYSTEM] CPU Optimization...",
+"[SYSTEM] GPU Optimization...",
+"[SYSTEM] RAM Clean...",
+"[SYSTEM] Sensitivity Patch...",
+"[SYSTEM] Regedit Applied...",
+"[SYSTEM] FPS Boost Enabled...",
+"[SUCCESS] Device optimized successfully"
+];
+
+let i=0;
+
+text.innerHTML="";
+
+let interval = setInterval(()=>{
+
+text.innerHTML += lines[i]+"\n";
+
+text.scrollTop = text.scrollHeight;
+
+i++;
+
+if(i>=lines.length){
+
+clearInterval(interval);
+
+setTimeout(()=>{
+box.style.display="none";
+},2000);
+
+}
+
+},400);
+
+}
+function runCode(type){
+
+const box = document.getElementById("codeBox");
+const text = document.getElementById("codeText");
+
+box.style.display="block";
+text.innerHTML="";
+
+let lines = [];
+
+if(type.includes("BOOST")){
+lines = [
+"> Initializing FPS Engine...",
+"> Unlocking GPU threads...",
+"> Clearing background apps...",
+"> Boosting render pipeline...",
+"> FPS Stable ✅"
+];
+}
+
+if(type.includes("Free Fire")){
+lines = [
+"> Initializing FPS Engine...",
+"> Unlocking GPU threads...",
+"> Clearing background apps...",
+"> Boosting render pipeline...",
+"> Scanning CPU usage...",
+"> Cleaning RAM cache...",
+"> Optimizing GPU load...",
+"> Applying performance profile...",
+"> ON SYSTEM IOS VER2 ✅"
+];
+}
+
+if(type.includes("OPTIMIZER")){
+lines = [
+"> Scanning CPU usage...",
+"> Cleaning RAM cache...",
+"> Optimizing GPU load...",
+"> Applying performance profile...",
+"> System Optimized ✅"
+];
+}
+
+let i=0;
+
+function typeLine(){
+if(i>=lines.length){
+setTimeout(()=>box.style.display="none",500);
+return;
+}
+
+text.innerHTML += lines[i]+"\n";
+text.scrollTop = text.scrollHeight;
+i++;
+
+setTimeout(typeLine,400);
+}
+
+typeLine();
+}
+
+
+  </script>
+</body>
+</html>
