@@ -674,7 +674,7 @@ async function checkKey(key, auto = false) {
             /* LOAD MENU */
             setTimeout(() => {
                 showMenu(data.daysLeft);
-startKeyTimer(data.daysLeft);
+startKeyTimer(data.expireAt, data.serverTime);
                 startGalaxy();
             }, 700);
         } else {
@@ -1102,7 +1102,7 @@ border-radius:8px;
 </div>
 
 <div class="toast">
-Đăng nhập thành công! Còn ${days} ngày
+Đăng nhập thành công!
 </div>
 <div class="contact">
 
@@ -1489,32 +1489,41 @@ runCode(type+" - "+device);
 
 }
 
-function startKeyTimer(days){
+
+function startKeyTimer(expireAt, serverTime){
 
 const statusBar = document.getElementById("sysStatus");
 
-let seconds = days * 24 * 60 * 60;
+const offset = Date.now() - serverTime;
 
-setInterval(()=>{
+function update(){
 
-seconds--;
+const now = Date.now() - offset;
+let sec = Math.floor((expireAt - now)/1000);
 
-let d = Math.floor(seconds / 86400);
-let h = Math.floor((seconds % 86400) / 3600);
-let m = Math.floor((seconds % 3600) / 60);
+if(sec <= 0){
+statusBar.innerHTML = "❌ Key Expired";
+return;
+}
+
+let d=Math.floor(sec/86400);
+let h=Math.floor((sec%86400)/3600);
+let m=Math.floor((sec%3600)/60);
+let s=sec%60;
+
+const sys = window.SYSTEM_STATUS || {};
 
 statusBar.innerHTML =
-`📱 ${getIOSVersion()}
- | 🌐 Server: 🟢 Online
- | 🔑 ${d}d ${h}h ${m}m`;
-
-if(seconds <= 0){
-statusBar.innerHTML = "❌ Key Expired";
-}
-
-},1000);
+`
+🔑 ${d}d ${h}h ${m}m ${s}s`;
 
 }
+
+update();
+setInterval(update,1000);
+
+}
+
 let selectedDevice=null;
 
 document.addEventListener("change",(e)=>{
